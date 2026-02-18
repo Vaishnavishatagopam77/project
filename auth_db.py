@@ -113,16 +113,16 @@ def register_user(username, email, password):
     except Exception as e:
         return False, f"Registration failed: {str(e)}"
 
-def authenticate_user(username, password):
-    """Authenticate user login"""
+def authenticate_user(email, password):
+    """Authenticate user login using email"""
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
         
         password_hash = hash_password(password)
         cursor.execute(
-            "SELECT id, username, email FROM users WHERE username = ? AND password_hash = ?",
-            (username, password_hash)
+            "SELECT id, username, email FROM users WHERE email = ? AND password_hash = ?",
+            (email, password_hash)
         )
         
         user = cursor.fetchone()
@@ -131,7 +131,7 @@ def authenticate_user(username, password):
         if user:
             return True, {"id": user[0], "username": user[1], "email": user[2]}
         else:
-            return False, "Invalid username or password"
+            return False, "Invalid email or password"
     
     except Exception as e:
         return False, f"Authentication failed: {str(e)}"

@@ -21,6 +21,43 @@ st.set_page_config(
 # Restoring the professional "NeoVihar" look while keeping the complex logic
 st.markdown("""
     <style>
+    /* Button Styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 12px 24px !important;
+        font-weight: 700 !important;
+        font-size: 15px !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
+    }
+    
+    .stButton > button:active {
+        transform: translateY(0px) !important;
+    }
+    
+    /* Text Input Styling */
+    .stTextInput > div > div > input {
+        border-radius: 8px !important;
+        border: 1px solid #e0e0e0 !important;
+        padding: 12px 14px !important;
+        font-size: 14px !important;
+        margin-bottom: 16px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+    }
+    
     /* Main Heading */
     .main-heading {
         text-align: center;
@@ -59,21 +96,6 @@ st.markdown("""
         background-color: #ffffff;
     }
 
-    /* Button styling */
-    div.stButton > button {
-        border-radius: 12px;
-        border: 1.5px solid #333;
-        padding: 10px 20px;
-        font-weight: 600;
-        transition: all 0.2s ease;
-    }
-    
-    div.stButton > button:hover {
-        border-color: #8A4FFF;
-        color: #8A4FFF;
-        transform: translateY(-2px);
-    }
-    
     .content-box {
         background-color: #f8f9fa;
         padding: 20px;
@@ -120,69 +142,6 @@ st.markdown("""
         font-weight: 700;
         font-size: 1.1rem;
         margin-bottom: 15px;
-    }
-    
-    /* Auth Forms */
-    .auth-container {
-        max-width: 450px;
-        margin: 50px auto;
-        padding: 40px;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    
-    .auth-title {
-        text-align: center;
-        color: #B28D59;
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-    
-    .auth-subtitle {
-        text-align: center;
-        color: #8A4FFF;
-        font-size: 1rem;
-        margin-bottom: 30px;
-    }
-    
-    .auth-input {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 1rem;
-    }
-    
-    .auth-button {
-        width: 100%;
-        padding: 12px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-    
-    .auth-link {
-        text-align: center;
-        margin-top: 20px;
-        color: #666;
-    }
-    
-    .auth-link a {
-        color: #8A4FFF;
-        text-decoration: none;
-        font-weight: 600;
-    }
-    
-    .auth-link a:hover {
-        text-decoration: underline;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -522,140 +481,413 @@ def select_topic(topic_code):
 # ==========================================
 
 def render_login():
-    """Render the login page"""
+    """Render the login page with professional design"""
+    st.set_page_config(page_title="NeoVihar - Login", page_icon="🚀", layout="wide")
+    
     st.markdown("""
-    <div class="auth-container">
-        <h1 class="auth-title">NeoVihar 🚀</h1>
-        <p class="auth-subtitle">Sign in to your account</p>
-    </div>
+    <style>
+        body, [data-testid="stAppViewContainer"], [data-testid="stVerticalBlockBorderWrapper"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+            min-height: 100vh !important;
+        }
+        
+        [data-testid="stAppViewContainer"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+        }
+        
+        .stApp {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+        }
+        
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            padding: 45px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .login-subtitle {
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .forgot-password a {
+            font-size: 13px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .signup-link {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
     """, unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col_left, col_main, col_right = st.columns([1, 1.2, 1])
     
-    with col2:
-        st.markdown("---")
-        username = st.text_input("Username", placeholder="Enter your username")
-        password = st.text_input("Password", placeholder="Enter your password", type="password")
+    with col_main:
+        st.markdown("""
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="color: white; font-size: 36px; margin: 0; font-weight: 700;">Login</h1>
+            <p style="color: rgba(255,255,255,0.8); font-size: 15px; margin: 10px 0 0 0;">Access your learning dashboard</p>
+        </div>
+        """, unsafe_allow_html=True)
         
-        col_btn1, col_btn2 = st.columns(2)
+        # Email input
+        email = st.text_input("", placeholder="Email", key="login_email", label_visibility="collapsed")
         
-        with col_btn1:
-            if st.button("🔓 Sign In", use_container_width=True):
-                if not username or not password:
-                    st.error("Please fill in all fields")
+        # Password input
+        password = st.text_input("", placeholder="Password", type="password", key="login_password", label_visibility="collapsed")
+        
+        # Forgot password link
+        st.markdown("""
+        <div style="text-align: right; margin-bottom: 25px; margin-top: -10px;">
+            <a href="#" style="color: #00d4ff; font-size: 13px; text-decoration: none; font-weight: 600;">Forgot password?</a>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Login button
+        if st.button("Login", use_container_width=True, key="login_btn"):
+            if not email or not password:
+                st.error("Please fill in all fields")
+            else:
+                success, result = authenticate_user(email, password)
+                if success:
+                    st.session_state.logged_in = True
+                    st.session_state.user_id = result['id']
+                    st.session_state.username = result['username']
+                    st.session_state.email = result['email']
+                    
+                    # Load user progress from database
+                    progress = get_user_progress(result['id'])
+                    for topic_code in TOPICS.keys():
+                        if topic_code in progress:
+                            st.session_state.learning_progress[topic_code] = progress[topic_code]['progress']
+                    
+                    st.success("Login successful! Redirecting...")
+                    st.session_state.stage = 'dashboard'
+                    time.sleep(1)
+                    st.rerun()
                 else:
-                    success, result = authenticate_user(username, password)
-                    if success:
-                        st.session_state.logged_in = True
-                        st.session_state.user_id = result['id']
-                        st.session_state.username = result['username']
-                        st.session_state.email = result['email']
-                        
-                        # Load user progress from database
-                        progress = get_user_progress(result['id'])
-                        for topic_code in TOPICS.keys():
-                            if topic_code in progress:
-                                st.session_state.learning_progress[topic_code] = progress[topic_code]['progress']
-                        
-                        st.success("Login successful! Redirecting...")
-                        st.session_state.stage = 'dashboard'
-                        time.sleep(1)
-                        st.rerun()
-                    else:
-                        st.error(result)
+                    st.error(result)
         
-        with col_btn2:
-            if st.button("📝 Sign Up", use_container_width=True):
-                st.session_state.stage = 'signup'
-                st.rerun()
+        # Divider
+        st.markdown("""
+        <div style="text-align: center; margin: 30px 0; color: rgba(255,255,255,0.6); font-size: 13px;">━━━━━━━━━━━━</div>
+        """, unsafe_allow_html=True)
         
-        st.markdown("---")
-        if st.button("🔑 Forgot Password?", use_container_width=True):
+        # Create Account button
+        if st.button("Create Account", use_container_width=True, key="goto_signup"):
+            st.session_state.stage = 'signup'
+            st.rerun()
+        
+        # Forgot Password button
+        if st.button("🔑 Forgot Password", use_container_width=True, key="forgot_from_login"):
             st.session_state.stage = 'forgot_password'
             st.rerun()
 
 def render_signup():
-    """Render the signup page"""
+    """Render the signup page with professional design"""
+    st.set_page_config(page_title="NeoVihar - Signup", page_icon="🚀", layout="wide")
+    
     st.markdown("""
-    <div class="auth-container">
-        <h1 class="auth-title">NeoVihar 🚀</h1>
-        <p class="auth-subtitle">Create your account</p>
-    </div>
+    <style>
+        body, [data-testid="stAppViewContainer"], [data-testid="stVerticalBlockBorderWrapper"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+            min-height: 100vh !important;
+        }
+        
+        [data-testid="stAppViewContainer"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+        }
+        
+        .stApp {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+        }
+        
+        .signup-container {
+            background: white;
+            border-radius: 15px;
+            padding: 45px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        .signup-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .signup-subtitle {
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+    </style>
     """, unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col_left, col_main, col_right = st.columns([1, 1.2, 1])
     
-    with col2:
-        st.markdown("---")
-        username = st.text_input("Username", placeholder="Choose a username (min 3 chars)")
-        email = st.text_input("Email", placeholder="Enter your email")
-        password = st.text_input("Password", placeholder="Create a password (min 6 chars)", type="password")
-        confirm_password = st.text_input("Confirm Password", placeholder="Confirm your password", type="password")
+    with col_main:
+        st.markdown("""
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="color: white; font-size: 36px; margin: 0; font-weight: 700;">Signup</h1>
+            <p style="color: rgba(255,255,255,0.8); font-size: 15px; margin: 10px 0 0 0;">Create your account</p>
+        </div>
+        """, unsafe_allow_html=True)
         
-        col_btn1, col_btn2 = st.columns(2)
+        # Username input
+        username = st.text_input("", placeholder="Username", key="signup_username", label_visibility="collapsed")
         
-        with col_btn1:
-            if st.button("✅ Create Account", use_container_width=True):
-                if not username or not email or not password or not confirm_password:
-                    st.error("Please fill in all fields")
-                elif password != confirm_password:
-                    st.error("Passwords do not match")
+        # Email input
+        email = st.text_input("", placeholder="Email", key="signup_email", label_visibility="collapsed")
+        
+        # Password input
+        password = st.text_input("", placeholder="Create password", type="password", key="signup_password", label_visibility="collapsed")
+        
+        # Confirm password input
+        confirm_password = st.text_input("", placeholder="Confirm password", type="password", key="signup_confirm", label_visibility="collapsed")
+        
+        # Signup button
+        if st.button("Signup", use_container_width=True, key="signup_btn"):
+            if not username or not email or not password or not confirm_password:
+                st.error("Please fill in all fields")
+            elif password != confirm_password:
+                st.error("Passwords do not match")
+            else:
+                success, message = register_user(username, email, password)
+                if success:
+                    st.success(message)
+                    st.info("Redirecting to login...")
+                    time.sleep(1)
+                    st.session_state.stage = 'login'
+                    st.rerun()
                 else:
-                    success, message = register_user(username, email, password)
-                    if success:
-                        st.success(message)
-                        st.info("Redirecting to login...")
-                        time.sleep(1)
-                        st.session_state.stage = 'login'
-                        st.rerun()
-                    else:
-                        st.error(message)
+                    st.error(message)
         
-        with col_btn2:
-            if st.button("← Back to Login", use_container_width=True):
-                st.session_state.stage = 'login'
-                st.rerun()
+        # Divider
+        st.markdown("""
+        <div style="text-align: center; margin: 30px 0; color: rgba(255,255,255,0.6); font-size: 13px;">━━━━━━━━━━━━</div>
+        """, unsafe_allow_html=True)
+        
+        # Back to Login button
+        if st.button("Back to Login", use_container_width=True, key="goto_login_from_signup"):
+            st.session_state.stage = 'login'
+            st.rerun()
 
 def render_forgot_password():
-    """Render the forgot password page"""
+    """Render the forgot password page with professional design"""
+    st.set_page_config(page_title="NeoVihar - Reset Password", page_icon="🚀", layout="wide")
+    
     st.markdown("""
-    <div class="auth-container">
-        <h1 class="auth-title">NeoVihar 🚀</h1>
-        <p class="auth-subtitle">Reset your password</p>
-    </div>
+    <style>
+        body, [data-testid="stAppViewContainer"], [data-testid="stVerticalBlockBorderWrapper"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+            min-height: 100vh !important;
+        }
+        
+        [data-testid="stAppViewContainer"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+        }
+        
+        .stApp {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+        }
+        
+        .forgot-container {
+            background: white;
+            border-radius: 15px;
+            padding: 45px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        .forgot-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .forgot-subtitle {
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+    </style>
     """, unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col_left, col_main, col_right = st.columns([1, 1.2, 1])
     
-    with col2:
-        st.markdown("---")
-        email = st.text_input("Email", placeholder="Enter your registered email")
-        new_password = st.text_input("New Password", placeholder="Enter new password (min 6 chars)", type="password")
-        confirm_password = st.text_input("Confirm Password", placeholder="Confirm new password", type="password")
+    with col_main:
+        st.markdown("""
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="color: white; font-size: 36px; margin: 0; font-weight: 700;">Reset Password</h1>
+            <p style="color: rgba(255,255,255,0.8); font-size: 15px; margin: 10px 0 0 0;">Enter your email and new password</p>
+        </div>
+        """, unsafe_allow_html=True)
         
-        col_btn1, col_btn2 = st.columns(2)
+        # Email input
+        email = st.text_input("", placeholder="Email", key="forgot_email", label_visibility="collapsed")
         
-        with col_btn1:
-            if st.button("🔄 Reset Password", use_container_width=True):
-                if not email or not new_password or not confirm_password:
-                    st.error("Please fill in all fields")
-                elif new_password != confirm_password:
-                    st.error("Passwords do not match")
+        # New password input
+        new_password = st.text_input("", placeholder="New password", type="password", key="forgot_password", label_visibility="collapsed")
+        
+        # Confirm password input
+        confirm_password = st.text_input("", placeholder="Confirm password", type="password", key="forgot_confirm", label_visibility="collapsed")
+        
+        # Reset button
+        if st.button("Reset Password", use_container_width=True, key="reset_btn"):
+            if not email or not new_password or not confirm_password:
+                st.error("Please fill in all fields")
+            elif new_password != confirm_password:
+                st.error("Passwords do not match")
+            else:
+                success, message = reset_password(email, new_password)
+                if success:
+                    st.success(message)
+                    st.info("Redirecting to login...")
+                    time.sleep(1)
+                    st.session_state.stage = 'login'
+                    st.rerun()
                 else:
-                    success, message = reset_password(email, new_password)
-                    if success:
-                        st.success(message)
-                        st.info("Redirecting to login...")
-                        time.sleep(1)
-                        st.session_state.stage = 'login'
-                        st.rerun()
-                    else:
-                        st.error(message)
+                    st.error(message)
         
-        with col_btn2:
-            if st.button("← Back to Login", use_container_width=True):
-                st.session_state.stage = 'login'
-                st.rerun()
+        # Divider
+        st.markdown("""
+        <div style="text-align: center; margin: 30px 0; color: rgba(255,255,255,0.6); font-size: 13px;">━━━━━━━━━━━━</div>
+        """, unsafe_allow_html=True)
+        
+        # Back to Login button
+        if st.button("Back to Login", use_container_width=True, key="goto_login_from_forgot"):
+            st.session_state.stage = 'login'
+            st.rerun()
 
 def render_dashboard():
     """Render the learning dashboard with progress visualization"""
